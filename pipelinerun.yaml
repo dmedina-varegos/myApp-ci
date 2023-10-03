@@ -1,0 +1,27 @@
+apiVersion: tekton.dev/v1beta1
+kind: PipelineRun
+metadata:
+  generateName: clone-build-push-deploy-run-
+spec:
+  serviceAccountName: docker-login
+  taskRunSpecs:
+    - pipelineTaskName: create-deployment
+      taskServiceAccountName: kubernetes-actions-account
+  pipelineRef:
+    name: clone-build-push-deploy
+  params:
+    - name: REPO
+      value: "https://github.com/dmedina-varegos/myApp-source"
+    - name: IMAGE
+      value: "docker.io/dmvaregos/gitops-demo"
+    - name: TAG
+      value: 1.0.2
+  workspaces:
+    - name: workspace
+      volumeClaimTemplate:
+        spec:
+          accessModes:
+            - ReadWriteOnce
+          resources:
+            requests:
+              storage: 1Gi
