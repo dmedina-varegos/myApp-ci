@@ -60,20 +60,30 @@ spec:
       workspaces:
         - name: manifest-dir
           workspace: workspace
-    - name: dev-test
+    - name: validation-test
       taskRef:
         name: newman
       runAfter:
         - create-deployment
       params:
         - name: COLLECTION
-          value: https://raw.githubusercontent.com/dmedina-varegos/myApp-ci/main/dmvaregos-gitops-demo.postman_collection.json
+          value: https://raw.githubusercontent.com/dmedina-varegos/myApp-config/main/validation.postman_collection.json
+        - name: ENVIRONMENT
+          value: newman-default-env.json
+    - name: functional-test
+      taskRef:
+        name: newman
+      runAfter:
+        - create-deployment
+      params:
+        - name: COLLECTION
+          value: https://raw.githubusercontent.com/dmedina-varegos/myApp-config/main/functional.postman_collection.json
         - name: ENVIRONMENT
           value: newman-default-env.json
   finally:
     - name: delete-deployment-if-failed  # this task verifies the status of dev test, it fails if testing fails
       when:
-        - input: $(tasks.dev-test.status)
+        - input: $(tasks.status)
           operator: in
           values: ["Failed"]
       params:
