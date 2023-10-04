@@ -6,7 +6,6 @@ spec:
   params:
     - name: REPO-SOURCE
     - name: REPO-CONFIG
-    - name: REPO-CI
     - name: IMAGE
     - name: TAG
   workspaces:

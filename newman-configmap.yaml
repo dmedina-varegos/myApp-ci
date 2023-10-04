@@ -1,0 +1,7 @@
+apiVersion: v1
+data:
+  newman-default-env.json: "{\n\t\"id\": \"30c331d4-e961-4606-aecb-5a60e8e15213\",\n\t\"name\": \"myapp-service\",\n\t\"values\": [\n\t\t{\n\t\t\t\"key\": \"host\",\n\t\t\t\"value\": \"myapp-service:80\",\n\t\t\t\"enabled\": true\n\t\t},\n\t\t{\n\t\t\t\"key\": \"scheme\",\n\t\t\t\"value\": \"http\",\n\t\t\t\"enabled\": true\n\t\t}\n\t],\n\t\"_postman_variable_scope\": \"environment\"\n}"
+kind: ConfigMap
+metadata:
+  name: newman-env
+  namespace: default
