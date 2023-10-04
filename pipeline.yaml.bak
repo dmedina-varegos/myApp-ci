@@ -56,7 +56,7 @@ spec:
       params:
         - name: script
           value: |
-            kubectl apply --filename deploy.yaml
+            kubectl apply --filename /workspace/output/deploy.yaml
       workspaces:
         - name: manifest-dir
           workspace: workspace
