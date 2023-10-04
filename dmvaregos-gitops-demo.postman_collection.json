@@ -25,12 +25,11 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:5000/books",
-					"protocol": "http",
+					"raw": "{{scheme}}://{{host}}/books",
+					"protocol": "{{scheme}}",
 					"host": [
-						"localhost"
+						"{{host}}"
 					],
-					"port": "5000",
 					"path": [
 						"books"
 					]
@@ -66,12 +65,11 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:5000/books",
-					"protocol": "http",
+					"raw": "{{scheme}}://{{host}}/books",
+					"protocol": "{{scheme}}",
 					"host": [
-						"localhost"
+						"{{host}}"
 					],
-					"port": "5000",
 					"path": [
 						"books"
 					]
@@ -98,12 +96,11 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:5000/books/3",
-					"protocol": "http",
+					"raw": "{{scheme}}://{{host}}/books/3",
+					"protocol": "{{scheme}}",
 					"host": [
-						"localhost"
+						"{{host}}"
 					],
-					"port": "5000",
 					"path": [
 						"books",
 						"3"
