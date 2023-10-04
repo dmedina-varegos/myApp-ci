@@ -1,0 +1,10 @@
+apiVersion: tekton.dev/v1 # or tekton.dev/v1beta1
+kind: TaskRun
+metadata:
+  generateName: newman-taskrun-
+spec:
+  params:
+    - name: COLLECTION
+      value: https://raw.githubusercontent.com/dmedina-varegos/myApp-ci/main/dmvaregos-gitops-demo.postman_collection.json
+  taskRef:
+    name: newman

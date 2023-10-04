@@ -7,6 +7,8 @@ spec:
   taskRunSpecs:
     - pipelineTaskName: create-deployment
       taskServiceAccountName: kubernetes-actions-account
+    - pipelineTaskName: delete-deployment-if-failed
+      taskServiceAccountName: kubernetes-actions-account
   pipelineRef:
     name: clone-build-push-deploy
   params:
@@ -14,8 +16,6 @@ spec:
       value: "https://github.com/dmedina-varegos/myApp-source"
     - name: REPO-CONFIG
       value: "https://github.com/dmedina-varegos/myApp-config"
-    - name: REPO-CI
-      value: "https://github.com/dmedina-varegos/myApp-ci"
     - name: IMAGE
       value: "docker.io/dmvaregos/gitops-demo"
     - name: TAG

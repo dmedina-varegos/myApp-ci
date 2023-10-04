@@ -6,7 +6,6 @@ spec:
   params:
     - name: REPO-SOURCE
     - name: REPO-CONFIG
-    - name: REPO-CI
     - name: IMAGE
     - name: TAG
   workspaces:
@@ -58,6 +57,31 @@ spec:
         - name: script
           value: |
             kubectl apply --filename deploy.yaml
+      workspaces:
+        - name: manifest-dir
+          workspace: workspace
+    - name: dev-test
+      taskRef:
+        name: newman
+      runAfter:
+        - create-deployment
+      params:
+        - name: COLLECTION
+          value: https://raw.githubusercontent.com/dmedina-varegos/myApp-ci/main/dmvaregos-gitops-demo.postman_collection.json
+        - name: ENVIRONMENT
+          value: newman-default-env.json
+  finally:
+    - name: delete-deployment-if-failed  # this task verifies the status of dev test, it fails if testing fails
+      when:
+        - input: $(tasks.dev-test.status)
+          operator: in
+          values: ["Failed"]
+      params:
+        - name: script
+          value: |
+                kubectl delete deployment myapp-deployment
+      taskRef:
+        name: kubernetes-actions
       workspaces:
         - name: manifest-dir
           workspace: workspace
